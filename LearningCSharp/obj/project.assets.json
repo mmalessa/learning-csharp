@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/marcin/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/projects/learning-csharp/LearningCSharp/LearningCSharp.csproj",
+      "projectUniqueName": "/app/LearningCSharp/LearningCSharp.csproj",
       "projectName": "LearningCSharp",
-      "projectPath": "/home/projects/learning-csharp/LearningCSharp/LearningCSharp.csproj",
-      "packagesPath": "/home/marcin/.nuget/packages/",
-      "outputPath": "/home/projects/learning-csharp/LearningCSharp/obj/",
+      "projectPath": "/app/LearningCSharp/LearningCSharp.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/app/LearningCSharp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/marcin/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -38,7 +38,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -54,6 +60,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.20, 8.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.20, 8.0.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -62,7 +82,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.120/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

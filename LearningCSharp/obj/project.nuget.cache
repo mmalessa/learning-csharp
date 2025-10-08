@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "B5MCJFYOBdxLh65sF6946J1TknQSA6jLY5I79F09aLRpJSa/B+bReuuwEmqr7yor2pYr7ESKQDuZaH3W2qC27A==",
+  "dgSpecHash": "PcKXy3ruK0M=",
   "success": true,
-  "projectFilePath": "/home/projects/learning-csharp/LearningCSharp/LearningCSharp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/app/LearningCSharp/LearningCSharp.csproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/microsoft.netcore.app.ref/8.0.20/microsoft.netcore.app.ref.8.0.20.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.20/microsoft.aspnetcore.app.ref.8.0.20.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.20/microsoft.netcore.app.host.linux-x64.8.0.20.nupkg.sha512"
+  ],
   "logs": []
 }
