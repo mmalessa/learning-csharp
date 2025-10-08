@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3iO4M7wAKMM=",
+  "dgSpecHash": "NUczkI4xbmk=",
   "success": true,
   "projectFilePath": "/app/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
   "expectedPackageFiles": [
-    "/home/ubuntu/.nuget/packages/microsoft.aspnetcore.openapi/10.0.0-rc.1.25451.107/microsoft.aspnetcore.openapi.10.0.0-rc.1.25451.107.nupkg.sha512",
-    "/home/ubuntu/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+    "/home/ubuntu/.nuget/packages/microsoft.aspnetcore.openapi/9.0.9/microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "/home/ubuntu/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
   ],
   "logs": []
 }

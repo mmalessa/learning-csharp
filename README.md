@@ -9,7 +9,14 @@ make run
 ```
 Open in browser: http://localhost:5000
 
-### C# notes
+### .net notes
+
+```shell
+wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --version 9.0.305
+```
+
 
 Create example project from zero to hero
 ``` shell
@@ -42,19 +49,20 @@ dotnet add src/LearningCSharp.Api/LearningCSharp.Api.csproj reference src/Learni
 
 ## Suggested NuGet's
 # in Api
-dotnet add src/OrderingService.Api package Swashbuckle.AspNetCore
-dotnet add src/OrderingService.Api package Serilog.AspNetCore
-dotnet add src/OrderingService.Api package MediatR.Extensions.Microsoft.DependencyInjection
+dotnet add src/LearningCSharp.Api package Microsoft.AspNetCore.OpenApi
+dotnet add src/LearningCSharp.Api package Swashbuckle.AspNetCore
+dotnet add src/LearningCSharp.Api package Serilog.AspNetCore
+dotnet add src/LearningCSharp.Api package MediatR.Extensions.Microsoft.DependencyInjection
 
 # in Application
-dotnet add src/OrderingService.Application package MediatR
-dotnet add src/OrderingService.Application package FluentValidation
+dotnet add src/LearningCSharp.Application package MediatR
+dotnet add src/LearningCSharp.Application package FluentValidation
 
 # in Infrastructure
-dotnet add src/OrderingService.Infrastructure package Microsoft.EntityFrameworkCore
-dotnet add src/OrderingService.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL
-dotnet add src/OrderingService.Infrastructure package Microsoft.EntityFrameworkCore.Design
-dotnet add src/OrderingService.Infrastructure package Confluent.Kafka
+dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore
+dotnet add src/LearningCSharp.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore.Design
+dotnet add src/LearningCSharp.Infrastructure package Confluent.Kafka
 
 ```
 

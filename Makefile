@@ -23,6 +23,10 @@ down: ## Down the docker containers
 shell:
 	@$(DC) exec -it app bash
 
+.PHONY: init
+init:
+	@$(DC) exec app sh -c '.docker/dotnet-install.sh --version 9.0.305'
+
 .PHONY: publish
 publish:
 	@$(DC) exec app sh -c 'dotnet restore'
