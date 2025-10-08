@@ -31,6 +31,7 @@ init:
 publish:
 	@$(DC) exec app sh -c 'dotnet restore'
 	@$(DC) exec app sh -c 'dotnet publish src/LearningCSharp.Api -c Release -o /app/publish'
+	@dotnet restore # workaround for absolute path's in obj/ files
 
 .PHONY: run
 run:
