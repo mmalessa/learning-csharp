@@ -15,5 +15,18 @@ Create example project from zero to hero
 ``` shell
 mkdir learning-csharp
 cd learning-csharp
-dotnet new web -n LearningCSharp --no-https
+
+# solution
+dotnet new sln -n LearningCSharp
+
+# projects
+dotnet new webapi -o src/LearningCSharp.Api --no-https
+
+# add projects to solution
+dotnet sln add src/LearningCSharp.Api/LearningCSharp.Api.csproj
+```
+
+```shell
+dotnet restore
+dotnet publish src/LearningCSharp.Api/LearningCsharp.Api.csproj -c Release /app/publish
 ```
