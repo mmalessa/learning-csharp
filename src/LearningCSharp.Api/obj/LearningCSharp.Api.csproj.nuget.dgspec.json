@@ -10,11 +10,11 @@
         "projectUniqueName": "/app/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
         "projectName": "LearningCSharp.Api",
         "projectPath": "/app/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
-        "packagesPath": "/root/.nuget/packages/",
+        "packagesPath": "/home/ubuntu/.nuget/packages/",
         "outputPath": "/app/src/LearningCSharp.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

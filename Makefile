@@ -25,9 +25,10 @@ shell:
 
 .PHONY: publish
 publish:
-	@$(DC) exec -it app sh -c 'cd LearningCSharp && dotnet restore && dotnet publish -c Release -o /app/publish'
+	@$(DC) exec app sh -c 'dotnet restore'
+	@$(DC) exec app sh -c 'dotnet publish src/LearningCSharp.Api -c Release -o /app/publish'
 
 .PHONY: run
 run:
-	@$(DC) exec -e ASPNETCORE_URLS=http://+:80 -it app sh -c 'dotnet publish/LearningCSharp.dll'
+	@$(DC) exec -e ASPNETCORE_URLS=http://+:80 -it app sh -c 'dotnet publish/LearningCSharp.Api.dll'
 
