@@ -123,19 +123,19 @@
     ]
   },
   "packageFolders": {
-    "/home/ubuntu/.nuget/packages/": {}
+    "/home/marcin/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/app/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
+      "projectUniqueName": "/home/projects/learning-csharp/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
       "projectName": "LearningCSharp.Api",
-      "projectPath": "/app/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
-      "packagesPath": "/home/ubuntu/.nuget/packages/",
-      "outputPath": "/app/src/LearningCSharp.Api/obj/",
+      "projectPath": "/home/projects/learning-csharp/src/LearningCSharp.Api/LearningCSharp.Api.csproj",
+      "packagesPath": "/home/marcin/.nuget/packages/",
+      "outputPath": "/home/projects/learning-csharp/src/LearningCSharp.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+        "/home/marcin/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -147,11 +147,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/app/src/LearningCSharp.Application/LearningCSharp.Application.csproj": {
-              "projectPath": "/app/src/LearningCSharp.Application/LearningCSharp.Application.csproj"
+            "/home/projects/learning-csharp/src/LearningCSharp.Application/LearningCSharp.Application.csproj": {
+              "projectPath": "/home/projects/learning-csharp/src/LearningCSharp.Application/LearningCSharp.Application.csproj"
             },
-            "/app/src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj": {
-              "projectPath": "/app/src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj"
+            "/home/projects/learning-csharp/src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj": {
+              "projectPath": "/home/projects/learning-csharp/src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj"
             }
           }
         }
@@ -196,7 +196,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/marcin/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

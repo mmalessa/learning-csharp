@@ -25,7 +25,7 @@ shell:
 
 .PHONY: init
 init:
-	@$(DC) exec app sh -c '.docker/dotnet-install.sh --version 9.0.305'
+	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Api package Microsoft.AspNetCore.OpenApi'
 
 .PHONY: publish
 publish:

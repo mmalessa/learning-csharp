@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vepx8OO8TSg=",
+  "dgSpecHash": "r3fxqAh03tE=",
   "success": true,
-  "projectFilePath": "/app/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
+  "projectFilePath": "/home/projects/learning-csharp/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

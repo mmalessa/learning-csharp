@@ -22,6 +22,7 @@ services:
         ports: ["5000:80"]
         volumes:
             - ./:/app
+            - ~/.nuget:/home/ubuntu/.nuget
         tty: true
         networks:
             devapp:

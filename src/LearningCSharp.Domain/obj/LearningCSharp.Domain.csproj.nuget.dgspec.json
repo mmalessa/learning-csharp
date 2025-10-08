@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/app/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj": {}
+    "/home/projects/learning-csharp/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj": {}
   },
   "projects": {
-    "/app/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj": {
+    "/home/projects/learning-csharp/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
+        "projectUniqueName": "/home/projects/learning-csharp/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
         "projectName": "LearningCSharp.Domain",
-        "projectPath": "/app/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/app/src/LearningCSharp.Domain/obj/",
+        "projectPath": "/home/projects/learning-csharp/src/LearningCSharp.Domain/LearningCSharp.Domain.csproj",
+        "packagesPath": "/home/marcin/.nuget/packages/",
+        "outputPath": "/home/projects/learning-csharp/src/LearningCSharp.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "/home/marcin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/marcin/.dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
