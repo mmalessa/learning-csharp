@@ -1,9 +1,6 @@
-using LearningCSharp.Domain.Common;
-using LearningCSharp.Domain.Events;
+namespace LearningCSharp.Domain.Orders;
 
-namespace LearningCSharp.Domain.Entities;
-
-public class Order : AggregateRoot
+public class Order
 {
     public Guid Id { get; private set; }
     public string CustomerId { get; private set; }
@@ -19,7 +16,7 @@ public class Order : AggregateRoot
         Total = total;
         CreatedAt = createdAt;
 
-        AddDomainEvent(new OrderCreated(Id, CustomerId, Total));
+        // AddDomainEvent(new OrderCreated(Id, CustomerId, Total));
     }
 
     public static Order Create(Guid id, string customerId, decimal total, DateTime createdAt) 
