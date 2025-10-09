@@ -26,6 +26,7 @@ shell:
 .PHONY: init
 init:
 	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Api package Microsoft.AspNetCore.OpenApi'
+	@dotnet restore
 
 .PHONY: publish
 publish:

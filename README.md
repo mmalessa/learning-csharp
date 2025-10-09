@@ -11,10 +11,14 @@ Open in browser: http://localhost:5000
 
 ### .net notes
 
+Ubuntu 24.04 (.net 9.0.305 version)
 ```shell
 wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh
 chmod +x dotnet-install.sh
 ./dotnet-install.sh --version 9.0.305
+
+# add to .bashrc
+export PATH="$PATH:$HOME/.dotnet"
 ```
 
 
