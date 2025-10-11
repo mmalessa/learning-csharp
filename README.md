@@ -1,15 +1,4 @@
-# My Demo Service
-
-##
-```shell
-make build
-
-make publish
-make run
-```
-Open in browser: http://localhost:5000
-
-### .net notes
+# Pizzeria
 
 Ubuntu 24.04 (.net 9.0.305 version)
 ```shell
@@ -23,64 +12,56 @@ export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 # dotnet tool install --global dotnet-ef --version 9.* # done in Dockerfile
 ```
 
-
-Create example project from zero to hero
-``` shell
-mkdir learning-csharp
-cd learning-csharp
-
-# solution
-dotnet new sln -n LearningCSharp
-
+###
+```shell
 # projects
-dotnet new webapi -o src/LearningCSharp.Api --no-https
-dotnet new console -o src/LearningCSharp.Console
-dotnet new classlib -o src/LearningCSharp.Domain
-dotnet new classlib -o src/LearningCSharp.Application
-dotnet new classlib -o src/LearningCSharp.Infrastructure
+dotnet new console -o src/Pizzeria.Console
+dotnet new classlib -o src/Pizzeria.Domain
+dotnet new classlib -o src/Pizzeria.Application
+dotnet new classlib -o src/Pizzeria.Infrastructure
 
 # add projects to solution
-dotnet sln add src/LearningCSharp.Api/LearningCSharp.Api.csproj
-dotnet sln add src/LearningCSharp.Console/LearningCSharp.Console.csproj
-dotnet sln add src/LearningCSharp.Domain/LearningCSharp.Domain.csproj
-dotnet sln add src/LearningCSharp.Application/LearningCSharp.Application.csproj
-dotnet sln add src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj
+dotnet sln add src/Pizzeria.Console/Pizzeria.Console.csproj
+dotnet sln add src/Pizzeria.Domain/Pizzeria.Domain.csproj
+dotnet sln add src/Pizzeria.Application/Pizzeria.Application.csproj
+dotnet sln add src/Pizzeria.Infrastructure/Pizzeria.Infrastructure.csproj
 
 # project dependencies
-dotnet add src/LearningCSharp.Application/LearningCSharp.Application.csproj reference src/LearningCSharp.Domain/LearningCSharp.Domain.csproj
-dotnet add src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj reference src/LearningCSharp.Application/LearningCSharp.Application.csproj
-dotnet add src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj reference src/LearningCSharp.Domain/LearningCSharp.Domain.csproj
-dotnet add src/LearningCSharp.Api/LearningCSharp.Api.csproj reference src/LearningCSharp.Application/LearningCSharp.Application.csproj
+dotnet add src/Pizzeria.Application/Pizzeria.Application.csproj reference src/Pizzeria.Domain/Pizzeria.Domain.csproj
+
+dotnet add src/Pizzeria.Infrastructure/Pizzeria.Infrastructure.csproj reference src/Pizzeria.Application/Pizzeria.Application.csproj
+dotnet add src/Pizzeria.Infrastructure/Pizzeria.Infrastructure.csproj reference src/Pizzeria.Domain/Pizzeria.Domain.csproj
+
 # optionally Api can refer to Infrastructure for easy DI (extension method) registration
-dotnet add src/LearningCSharp.Api/LearningCSharp.Api.csproj reference src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj
-dotnet add src/LearningCSharp.Api/LearningCSharp.Console.csproj reference src/LearningCSharp.Infrastructure/LearningCSharp.Infrastructure.csproj
-
-
-## Suggested NuGet's
-# in Api
-dotnet add src/LearningCSharp.Api package Microsoft.AspNetCore.OpenApi
-dotnet add src/LearningCSharp.Api package Swashbuckle.AspNetCore
-dotnet add src/LearningCSharp.Api package Serilog.AspNetCore
-dotnet add src/LearningCSharp.Api package MediatR.Extensions.Microsoft.DependencyInjection
-
-# in Console
-dotnet add src/LearningCSharp.Console package Microsoft.Extensions.Hosting
-
-# in Application
-dotnet add src/LearningCSharp.Application package MediatR
-dotnet add src/LearningCSharp.Application package FluentValidation
-
-# in Infrastructure
-dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore --version 9.0.9
-dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore.Relational --version 9.0.9
-dotnet add src/LearningCSharp.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL --version 9.0.9
-dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore.Tools --version 9.0.9
-dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore.Design --version 9.0.9
-dotnet add src/LearningCSharp.Infrastructure package Confluent.Kafka
-
+dotnet add src/Pizzeria.Console/Pizzeria.Console.csproj reference src/Pizzeria.Infrastructure/Pizzeria.Infrastructure.csproj
+dotnet add src/Pizzeria.Api/Pizzeria.Api.csproj reference src/Pizzeria.Infrastructure/Pizzeria.Infrastructure.csproj
 ```
 
+### Dev commands
 ```shell
-dotnet restore
-dotnet publish src/LearningCSharp.Api/LearningCsharp.Api.csproj -c Release /app/publish
+dotnet build
+dotnet run --project src/Pizzeria.Console -- --help
+dotnet run --project src/Pizzeria.Console -- pizza --help
+dotnet run --project src/Pizzeria.Console -- pizza add 10 "Quattro Formaggi" Medium 34.50
+dotnet run --project src/Pizzeria.Console -- pizza remove 10
+dotnet run --project src/Pizzeria.Console -- pizza list
+
+dotnet publish src/Pizzeria.Api/Pizzeria.Api.csproj -c Release -o publish
+dotnet publish/Pizzeria.Api.dll
+```
+
+### Migrations
+```shell
+# create migrations
+dotnet ef migrations add InitialCreate --project src/Pizzeria.Infrastructure
+dotnet ef migrations add RemoveIdentityFromPizzaId --project src/Pizzeria.Infrastructure
+
+# update database
+dotnet ef database update --project src/Pizzeria.Infrastructure
+
+# list migrations
+dotnet ef migrations list --project src/Pizzeria.Infrastructure
+
+# remove migrations
+dotnet ef migrations remove --project src/Pizzeria.Infrastructure
 ```

@@ -1,22 +1,22 @@
 services:
-    postgres:
-        image: postgres:18
-        environment:
-            POSTGRES_DB: demo
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-        ports: 
-            - "5432:5432"
-        volumes: 
-            - "postgres_data:/var/lib/postgresql"
-        networks:
-            devapp:
-    
+#    postgres:
+#        image: postgres:18
+#        environment:
+#            POSTGRES_DB: demo
+#            POSTGRES_USER: postgres
+#            POSTGRES_PASSWORD: postgres
+#        ports: 
+#            - "5432:5432"
+#        volumes: 
+#            - "postgres_data:/var/lib/postgresql"
+#        networks:
+#            devapp:
+#    
     mssql:
         image: mcr.microsoft.com/mssql/server
         environment:
             ACCEPT_EULA: Y
-            MSSQL_SA_PASSWORD: Test123456
+            MSSQL_SA_PASSWORD: MsSql12345
             MSSQL_PID: Developer
         ports:
             - "1433:1433"
@@ -24,19 +24,18 @@ services:
             - mssql_data:/var/opt/mssql
         networks:
             devapp:
-    
     app:
         build: 
             context: .
-        depends_on: 
-            - postgres
+#        depends_on: 
+#            - postgres
         environment:
-            - DATABASE_PG_URI=Host=postgres;Database=demo;Username=postgres;Password=postgres
-            - DATABASE_MS_URI=Server=mssql,1433;User Id=sa;Password=Test123456;TrustServerCertificate=True
+#            - PIZZERIA_DB=Server=mssql,1433;Database=Pizzeria;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True
+            - PIZZERIA_DB=Server=mssql,1433;Database=master;User Id=sa;Password=MsSql12345;TrustServerCertificate=True
         ports: ["5000:80"]
         volumes:
             - ./:/app
-            # - ~/.nuget:/home/ubuntu/.nuget
+            - ~/.nuget:/home/ubuntu/.nuget
         tty: true
         networks:
             devapp:

@@ -1,0 +1,19 @@
+using Mediator;
+using Pizzeria.Application.Abstractions;
+using Pizzeria.Domain;
+
+namespace Pizzeria.Application.Pizzas;
+
+public sealed record AddPizza(int Id, string Name, PizzaSize Size, decimal Price) : IRequest<Unit>;
+
+public sealed class AddPizzaHandler(IPizzaRepository repo, IUnitOfWork uow) : IRequestHandler<AddPizza, Unit>
+{
+    public async ValueTask<Unit> Handle(AddPizza request, CancellationToken ct)
+    {
+        var entity = new Pizza(request.Id, request.Name, request.Size, request.Price);
+        await repo.AddAsync(entity, ct);
+        await uow.SaveChangesAsync(ct);
+        
+        return Unit.Value;
+    }
+}

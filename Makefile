@@ -23,32 +23,29 @@ down: ## Down the docker containers
 shell:
 	@$(DC) exec -it app bash
 
-.PHONY: init
-init:
-	@$(MAKE) init-packages
-	@$(MAKE) init-database
-	@dotnet restore
-
 .PHONY: init-packages
 init-packages:
-	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Api package Microsoft.AspNetCore.OpenApi'
-	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Console package Microsoft.Extensions.Hosting'
-	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore'
-	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL'
-	@$(DC) exec app sh -c 'dotnet add src/LearningCSharp.Infrastructure package Microsoft.EntityFrameworkCore.Design'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Console package Spectre.Console.Cli'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Console package Microsoft.Extensions.Hosting'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Console package Spectre.Console'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Console package Mediator.SourceGenerator'
+	
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Application package Microsoft.Extensions.DependencyInjection.Abstractions'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Application package Mediator.Abstractions'
+	
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.EntityFrameworkCore'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.EntityFrameworkCore.SqlServer'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.EntityFrameworkCore.Design'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.Extensions.Configuration'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.Extensions.Configuration.EnvironmentVariables'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.Extensions.DependencyInjection'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Mediator.Abstractions'
 
 .PHONY: init-database
 init-database:
-	@$(DC) exec app sh -c 'dotnet ef migrations add InitialCreate --project src/LearningCSharp.Infrastructure'
+	@$(DC) exec app sh -c 'dotnet ef database update --project src/Pizzeria.Infrastructure'
 
-.PHONY: publish
-publish:
-	@$(DC) exec app sh -c 'dotnet restore'
-	@$(DC) exec app sh -c 'dotnet publish src/LearningCSharp.Api -c Release -o /app/publish'
-	@$(DC) exec app sh -c 'dotnet publish src/LearningCSharp.Console -c Release -o /app/publish'
-	@dotnet restore # workaround for absolute path's in obj/ files
-
-.PHONY: run
-run:
-	@$(DC) exec -e ASPNETCORE_URLS=http://+:80 -it app sh -c 'dotnet publish/LearningCSharp.Api.dll'
-
+.PHONY: compile
+compile:
+	@$(DC) exec app sh -c 'dotnet publish src/Pizzeria.Console -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o bin'
+	@$(DC) exec app sh -c 'dotnet publish src/Pizzeria.Api -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -o bin'
