@@ -48,9 +48,7 @@ var kafkaBs = Environment.GetEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS")
 var kafkaTopic = Environment.GetEnvironmentVariable("KAFKA_TOPIC")
     ?? throw new InvalidOperationException("KAFKA_TOPIC environment variable must be set.");
 
-builder.Services.AddSingleton<IEventDispatcher>(_ =>
-    new KafkaEventDispatcher(kafkaBs, kafkaTopic)
-);
+builder.Services.AddOutboxProcessor(kafkaBs, kafkaTopic);
 
 var app = builder.Build();
 
