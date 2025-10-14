@@ -20,7 +20,9 @@ public sealed class RemovePizzaHandler(
         await uow.SaveChangesAsync(ct);
 
         var evt = new PizzaRemovedEvent(entity.Id);
-        await events.PublishAsync("pizza-removed", evt, ct);
+        var messageKey = entity.Id.ToString();
+        const string schemaId = "mm.pizzeria.pizza-removed";
+        await events.PublishAsync(schemaId, messageKey, evt, ct);
         
         return true;
     }

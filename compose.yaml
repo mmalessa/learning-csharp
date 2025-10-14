@@ -3,12 +3,15 @@ services:
     build: 
       context: .
     environment:
-      - PIZZERIA_DB=Server=mssql,1433;Database=master;User Id=sa;Password=MsSql12345;TrustServerCertificate=True
+        PIZZERIA_DB: Server=mssql,1433;Database=master;User Id=sa;Password=MsSql12345;TrustServerCertificate=True
+        KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+        KAFKA_TOPIC: "pizza"
     ports: 
       - "5000:80"
     volumes:
       - ./:/app
       - ~/.nuget:/home/ubuntu/.nuget
+      - ./.docker/app/.bash_history:/home/ubuntu/.bash_history
     tty: true
     networks:
       devapp:

@@ -20,7 +20,9 @@ public sealed class AddPizzaHandler(
         await uow.SaveChangesAsync(ct);
         
         var evt = new PizzaAddedEvent(entity.Id, entity.Name, entity.Size.ToString(), entity.Price);
-        await events.PublishAsync("pizza-added", evt, ct);
+        var messageKey = entity.Id.ToString();
+        const string schemaId = "mm.pizzeria.pizza-added";
+        await events.PublishAsync(schemaId, messageKey, evt, ct);
         
         return Unit.Value;
     }

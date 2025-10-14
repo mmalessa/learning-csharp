@@ -17,13 +17,22 @@ var builder = Host.CreateDefaultBuilder(args)
         var conn = Environment.GetEnvironmentVariable("PIZZERIA_DB");
         if (string.IsNullOrWhiteSpace(conn))
         {
-            Console.WriteLine("ERROR: PIZZERIA_DB not set in environment variables.");
-            Environment.Exit(1);
+            throw new InvalidOperationException("PIZZERIA_DB environment variable must be set.");
         }
         services.AddInfrastructure(conn);
 
+        var kafkaBs = Environment.GetEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS");
+        if (string.IsNullOrWhiteSpace(kafkaBs))
+        {
+            throw new InvalidOperationException("KAFKA_BOOTSTRAP_SERVERS environment variable must be set.");
+        }
+        var kafkaTopic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
+        if (string.IsNullOrWhiteSpace(kafkaTopic))
+        {
+            throw new InvalidOperationException("KAFKA_TOPIC environment variable must be set.");
+        }
         services.AddSingleton<IEventDispatcher>(_ =>
-            new KafkaEventDispatcher("kafka:9092")
+            new KafkaEventDispatcher(kafkaBs, kafkaTopic)
         );
         
         // Komendy – rejestrujemy w hostowym DI

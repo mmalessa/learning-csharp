@@ -1,0 +1,20 @@
+### Info
+GET localhost:5000/
+
+### List pizzas
+GET localhost:5000/pizzas
+
+### Add pizza
+POST localhost:5000/pizzas
+Content-Type: application/json
+
+{
+    "id": 20,
+    "name": "Africana",
+    "size": "Large",
+    "price": "23.18"
+}
+
+### Remove pizza
+DELETE localhost:5000/pizzas/20
+
