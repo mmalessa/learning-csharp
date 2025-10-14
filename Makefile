@@ -40,6 +40,7 @@ init-packages:
 	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.Extensions.Configuration.EnvironmentVariables'
 	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Microsoft.Extensions.DependencyInjection'
 	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Mediator.Abstractions'
+	@$(DC) exec app sh -c 'dotnet add src/Pizzeria.Infrastructure package Confluent.Kafka'
 
 .PHONY: init-database
 init-database:

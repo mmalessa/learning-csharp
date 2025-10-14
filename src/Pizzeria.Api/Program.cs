@@ -1,20 +1,15 @@
 using System.Text.Json.Serialization;
 using Mediator;
 using Pizzeria.Application;
+using Pizzeria.Application.Abstractions;
 using Pizzeria.Application.Pizzas;
 using Pizzeria.Domain;
 using Pizzeria.Infrastructure;
+using Pizzeria.Infrastructure.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://+:80");
-
-var connectionString = Environment.GetEnvironmentVariable("PIZZERIA_DB");
-if (string.IsNullOrWhiteSpace(connectionString))
-{
-    throw new InvalidOperationException("PIZZERIA_DB environment variable must be set.");
-}
-Console.WriteLine($"Using connection string: {connectionString}");
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -26,7 +21,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediator();
 builder.Services.AddApplication();
+
+var connectionString = Environment.GetEnvironmentVariable("PIZZERIA_DB");
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("PIZZERIA_DB environment variable must be set.");
+}
+Console.WriteLine($"Using connection string: {connectionString}");
 builder.Services.AddInfrastructure(connectionString);
+
+builder.Services.AddSingleton<IEventDispatcher>(_ =>
+    new KafkaEventDispatcher("kafka:9092")
+);
 
 var app = builder.Build();
 

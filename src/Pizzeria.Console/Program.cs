@@ -3,23 +3,29 @@ using Microsoft.Extensions.Hosting;
 using Spectre.Console.Cli;
 using Pizzeria.Console.Commands;
 using Pizzeria.Application;
+using Pizzeria.Application.Abstractions;
 using Pizzeria.Infrastructure;
-using Pizzeria.Console; // <- dla ServiceProviderTypeRegistrar
+using Pizzeria.Console;
+using Pizzeria.Infrastructure.Kafka; // <- dla ServiceProviderTypeRegistrar
 
 var builder = Host.CreateDefaultBuilder(args)
     .ConfigureServices((ctx, services) =>
     {
+        services.AddMediator();
+        services.AddApplication();
+        
         var conn = Environment.GetEnvironmentVariable("PIZZERIA_DB");
         if (string.IsNullOrWhiteSpace(conn))
         {
             Console.WriteLine("ERROR: PIZZERIA_DB not set in environment variables.");
             Environment.Exit(1);
         }
-
-        services.AddMediator();
-        services.AddApplication();
         services.AddInfrastructure(conn);
 
+        services.AddSingleton<IEventDispatcher>(_ =>
+            new KafkaEventDispatcher("kafka:9092")
+        );
+        
         // Komendy – rejestrujemy w hostowym DI
         services.AddTransient<AddPizzaCommand>();
         services.AddTransient<RemovePizzaCommand>();

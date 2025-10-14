@@ -1,11 +1,16 @@
 using Mediator;
 using Pizzeria.Application.Abstractions;
+using Pizzeria.Application.Events;
 
 namespace Pizzeria.Application.Pizzas;
 
 public sealed record RemovePizza(int Id) : IRequest<bool>; // true gdy usunięto
 
-public sealed class RemovePizzaHandler(IPizzaRepository repo, IUnitOfWork uow) : IRequestHandler<RemovePizza, bool>
+public sealed class RemovePizzaHandler(
+    IPizzaRepository repo, 
+    IUnitOfWork uow,
+    IEventDispatcher events
+) : IRequestHandler<RemovePizza, bool>
 {
     public async ValueTask<bool> Handle(RemovePizza request, CancellationToken ct)
     {
@@ -13,6 +18,10 @@ public sealed class RemovePizzaHandler(IPizzaRepository repo, IUnitOfWork uow) :
         if (entity is null) return false;
         await repo.RemoveAsync(entity, ct);
         await uow.SaveChangesAsync(ct);
+
+        var evt = new PizzaRemovedEvent(entity.Id);
+        await events.PublishAsync("pizza-removed", evt, ct);
+        
         return true;
     }
 }
