@@ -25,11 +25,13 @@ internal static class HostBuilderExtensions
             var kafkaBootstrapServers = GetRequiredEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS");
             var kafkaTopic = GetRequiredEnvironmentVariable("KAFKA_TOPIC");
 
+            services.AddOutboxProcessor(kafkaBootstrapServers, kafkaTopic);
             services.AddSingleton<IEventDispatcher>(_ => new KafkaEventDispatcher(kafkaBootstrapServers, kafkaTopic));
 
             services.AddTransient<AddPizzaCommand>();
             services.AddTransient<RemovePizzaCommand>();
             services.AddTransient<ListPizzasCommand>();
+            services.AddTransient<OutboxConsumeCommand>();
         });
     }
 
