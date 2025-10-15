@@ -1,62 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Spectre.Console.Cli;
-using Pizzeria.Console.Commands;
-using Pizzeria.Application;
-using Pizzeria.Application.Abstractions;
-using Pizzeria.Infrastructure;
+﻿using Microsoft.Extensions.Hosting;
+using Pizzeria.Console.Configuration;
 using Pizzeria.Console;
-using Pizzeria.Infrastructure.Kafka; // <- dla ServiceProviderTypeRegistrar
 
 var builder = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((ctx, services) =>
-    {
-        services.AddMediator();
-        services.AddApplication();
-        
-        var conn = Environment.GetEnvironmentVariable("PIZZERIA_DB");
-        if (string.IsNullOrWhiteSpace(conn))
-        {
-            throw new InvalidOperationException("PIZZERIA_DB environment variable must be set.");
-        }
-        services.AddInfrastructure(conn);
-
-        var kafkaBs = Environment.GetEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS");
-        if (string.IsNullOrWhiteSpace(kafkaBs))
-        {
-            throw new InvalidOperationException("KAFKA_BOOTSTRAP_SERVERS environment variable must be set.");
-        }
-        var kafkaTopic = Environment.GetEnvironmentVariable("KAFKA_TOPIC");
-        if (string.IsNullOrWhiteSpace(kafkaTopic))
-        {
-            throw new InvalidOperationException("KAFKA_TOPIC environment variable must be set.");
-        }
-        services.AddSingleton<IEventDispatcher>(_ =>
-            new KafkaEventDispatcher(kafkaBs, kafkaTopic)
-        );
-        
-        // Komendy – rejestrujemy w hostowym DI
-        services.AddTransient<AddPizzaCommand>();
-        services.AddTransient<RemovePizzaCommand>();
-        services.AddTransient<ListPizzasCommand>();
-    });
+    .ConfigurePizzeriaServices();
 
 using var host = builder.Build();
 
-// Tworzymy CommandApp dopiero TERAZ i wpinamy resolver z host.Services
-var registrar = new ServiceProviderTypeRegistrar(host.Services);
-var app = new CommandApp(registrar);
-
-app.Configure(config =>
-{
-    config.SetApplicationName("pizzeria");
-    config.AddBranch("pizza", pizza =>
-    {
-        pizza.SetDescription("Operacje na pizzach");
-        pizza.AddCommand<AddPizzaCommand>("add").WithDescription("Dodaj pizzę");
-        pizza.AddCommand<RemovePizzaCommand>("remove").WithDescription("Usuń pizzę");
-        pizza.AddCommand<ListPizzasCommand>("list").WithDescription("Lista pizz");
-    });
-});
+var app = CommandAppFactory.Create(host.Services);
 
 return app.Run(args);
