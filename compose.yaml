@@ -11,7 +11,6 @@ services:
     volumes:
       - ./:/app
       - ~/.nuget:/home/ubuntu/.nuget
-      - ./.docker/app/.bash_history:/home/ubuntu/.bash_history
     tty: true
     networks:
       devapp:
