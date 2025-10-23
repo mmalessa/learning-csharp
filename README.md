@@ -14,6 +14,9 @@ export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
 
 ###
 ```shell
+# solution
+dotnet new sln -n Pizzeria
+
 # projects
 dotnet new console -o src/Pizzeria.Console
 dotnet new classlib -o src/Pizzeria.Domain
