@@ -1,11 +1,11 @@
 ### Info
-GET localhost:5000/
+GET http://localhost:5000/
 
 ### List pizzas
-GET localhost:5000/pizzas
+GET http://localhost:5000/pizzas
 
 ### Add pizza
-POST localhost:5000/pizzas
+POST http://localhost:5000/pizzas
 Content-Type: application/json
 
 {
@@ -16,5 +16,5 @@ Content-Type: application/json
 }
 
 ### Remove pizza
-DELETE localhost:5000/pizzas/20
+DELETE http://localhost:5000/pizzas/20
 
